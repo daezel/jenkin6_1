@@ -37,12 +37,7 @@ pipeline{
         }
         stage('Deploy to Production'){
             steps{
-                echo "Deployment to -> ->  ${PRODUCTION_ENVIRONMENT} Started and completed!"
-            }
-        }
-        stage('Complete'){
-            steps{
-                echo "Completed!"
+                echo "Deployment to ->  ${PRODUCTION_ENVIRONMENT} Started and completed!"
             }
         }
     }
