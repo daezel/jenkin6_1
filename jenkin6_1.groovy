@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                echo "fetch the source code from ${DIRECTORY_PATH}"
+                echo "fetch the source code from this ->  ${DIRECTORY_PATH}"
                 echo "compile the code and generate any necessary artifacts"
             }
         }
