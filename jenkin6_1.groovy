@@ -15,7 +15,7 @@ pipeline{
                 success{
                     mail to: "daezelgoyal01@gmail.com",
                     subject: "Build Status Email",
-                    build: "Build was Successful!!!"    
+                    body: "Build was Successful!!!"    
                 }
             }                 
         }
