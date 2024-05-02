@@ -43,7 +43,7 @@ pipeline{
         stage('Code Quality Check'){
             steps{
                 echo "checking the quality of the code"
-                echo "code analysis tool: SonarQube
+                echo "code analysis tool: SonarQube"
                 echo "Done!!!"
             }
         }
