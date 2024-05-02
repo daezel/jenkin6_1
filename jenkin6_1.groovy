@@ -1,94 +1,98 @@
-pipeline {
+pipeline{
     agent any
-
-    stages {
-        stage('Stage 1: Build') {
-            steps {
-                echo 'Building the code using Maven'
-            }
+    environment{
+        DIRECTORY_PATH ="https://github.com/daezel/jenkin6_1.git"
+        TESTING_ENVIRONMENT="AWS EC2"
+        PRODUCTION_ENVIRONMENT="AWS EC2"
+    }
+    stages{
+        stage('Build'){
+            steps{
+                echo "fetch the source code from this -> ${DIRECTORY_PATH}"
+                echo "Building..."
+                echo "Build automation tool: Maven"
+            }      
         }
-
-        stage('Stage 2: Unit and Integration Tests') {
-            steps {
-                echo 'Running unit tests using JUnit and integration tests using Selenium'
+        stage('Test'){
+            steps{
+                echo "unit testing using Katalon"
+                echo "integration testing using Selenium"
             }
-            post {
-                always {
-                    sendEmailWithLog('Stage 2: Unit and Integration Tests')
+            post{
+                success{
+                    emailext(
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests successfuly completed', 
+                        attachLog: true
+                    )
+                }
+                failure{
+                    emailext(
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests Failed!!!', 
+                        attachLog: true   
+                    )
                 }
             }
         }
-
-        stage('Stage 3: Code Analysis') {
-            steps {
-                echo 'Performing code analysis using SonarQube'
+        stage('Code Quality Check'){
+            steps{
+                echo "checking the quality of the code"
+                echo "code analysis tool: SonarQube"
+                echo "Done!!!"
             }
         }
-
-        stage('Stage 4: Security Scan') {
+        stage('Security Scan') {
             steps {
-                echo 'Performing security scan using OWASP ZAP'
+                echo "Perform a security scan on the code using OWASP Dependency-Check"
             }
-            post {
-                always {
-                    sendEmailWithLog('Stage 4: Security Scan')
+            post{
+                success{
+                    emailext(
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests successfuly completed', 
+                        attachLog: true
+                    )   
+                }
+                failure{
+                    emailext(
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests could not be completed', 
+                        attachLog: true   
+                    )    
                 }
             }
         }
-
-        stage('Stage 5: Deploy to Staging') {
+        stage('Deploy to Staging'){
+            steps{
+                echo "deploy the application to ${TESTING_ENVIRONMENT}"
+            }
+        }
+        stage('integration test on staging') {
             steps {
-                echo 'Deploying the application to the staging server'
+                echo 'running integration test on staging'
             }
         }
-
-        stage('Stage 6: Integration Tests on Staging') {
-            steps {
-                echo 'Running integration tests on the staging environment using Selenium'
+        stage('Approval'){
+            steps{
+                echo "Approval Started"
+                sleep(time:10, unit: 'SECONDS')
+                echo "Approval Ended"
             }
         }
-
-        stage('Stage 7: Deploy to Production') {
-            steps {
-                echo 'Deploying the application to the production :  AWS EC2 instance server '
+        stage('Deploy to Production'){
+            steps{
+                echo "Deployment to ->  ${PRODUCTION_ENVIRONMENT} Started and completed!"
             }
         }
-    }
-
-    post {
-        always {
-            script {
-                def emailSubject = "${currentBuild.currentResult} - ${currentBuild.fullDisplayName}"
-                def emailBody = """
-                    Pipeline Status: ${currentBuild.currentResult}
-                    Build URL: ${env.BUILD_URL}
-                """
-
-                emailext(
-                    subject: emailSubject,
-                    body: emailBody,
-                    to: 'daezelgoyal01@gmail.com'
-                )
+        stage('Complete'){
+            steps{
+                echo "Completed!"
             }
         }
-    }
-}
-
-def sendEmailWithLog(stageName) {
-    script {
-        def email_subject = "${currentBuild.currentResult} - ${currentBuild.fullDisplayName} - ${stageName}"
-        def emailBody = """
-            Stage: ${stageName}
-            Status: ${currentBuild.currentResult}
-            Build URL: ${env.BUILD_URL}
-            Console Output: ${currentBuild.rawBuild.getLog(200)}
-        """
-
-        emailext(
-            subject: email_subject,
-            body: emailBody,
-            to: 'abdulmueezgujjar@gmail.com',
-            attachLog: true
-        )
     }
 }
