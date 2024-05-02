@@ -23,7 +23,7 @@ pipeline{
                     emailext(
                         to: 'daezelgoyal01@gmail.com',
                         subject: 'Security Scan',
-                        body: 'Security Scan Tests successfuly completed', 
+                        body: 'Testing successfuly completed!!!', 
                         attachLog: true
                     )
                 }
@@ -31,7 +31,7 @@ pipeline{
                     emailext(
                         to: 'daezelgoyal01@gmail.com',
                         subject: 'Security Scan',
-                        body: 'Security Scan Tests Failed!!!', 
+                        body: 'Testing Failed!!!', 
                         attachLog: true   
                     )
                 }
@@ -53,7 +53,7 @@ pipeline{
                     emailext(
                         to: 'daezelgoyal01@gmail.com',
                         subject: 'Security Scan',
-                        body: 'Security Scan Tests successfuly completed', 
+                        body: 'Security Scan Tests successfuly completed!!!', 
                         attachLog: true
                     )   
                 }
@@ -61,7 +61,7 @@ pipeline{
                     emailext(
                         to: 'daezelgoyal01@gmail.com',
                         subject: 'Security Scan',
-                        body: 'Security Scan Tests could not be completed', 
+                        body: 'Security Scan Tests Failed!!!', 
                         attachLog: true   
                     )    
                 }
