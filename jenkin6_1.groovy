@@ -1,15 +1,14 @@
 pipeline{
     agent any
     environment{
-        DIRECTORY_PATH ="path"
-        TESTING_ENVIRONMENT="test_env"
-        PRODUCTION_ENVIRONMENT="DAEZEL"
+        DIRECTORY_PATH ="https://github.com/daezel/jenkin6_1.git"
+        TESTING_ENVIRONMENT="AWS EC2"
+        PRODUCTION_ENVIRONMENT="AWS EC2"
     }
     stages{
         stage('Build'){
             steps{
                 echo "fetch the source code from this -> ${DIRECTORY_PATH}"
-                echo "compile the code and generate any necessary artifacts"
                 echo "Building..."
                 echo "Build automation tool: Maven"
             }
@@ -23,18 +22,58 @@ pipeline{
         }
         stage('Test'){
             steps{
-                echo "unit tests"
-                echo "integration tests"
+                echo "unit testing using Katalon"
+                echo "integration testing using Selenium"
+            }
+            post{
+                success{
+                      mail to: 'daezelgoyal01@gmail.com',
+                      subject: 'Security Scan',
+                      body: 'Security Scan Tests successfuly completed', 
+                      attachLog: true
+                }
+                failure{
+                      mail to: 'daezelgoyal01@gmail.com',
+                      subject: 'Security Scan',
+                      body: 'Security Scan Tests successfuly completed', 
+                      attachLog: true   
+                }
             }
         }
         stage('Code Quality Check'){
             steps{
-                sh 'echo "check the quality of the code"'
+                echo "checking the quality of the code"
+                echo "code analysis tool: SonarQube
+                echo "Done!!!"
             }
         }
-        stage('Deploy'){
+        stage('Security Scan') {
+            steps {
+                echo "Perform a security scan on the code using OWASP Dependency-Check"
+            }
+            post{
+                success{
+                      mail to: 'daezelgoyal01@gmail.com',
+                      subject: 'Security Scan',
+                      body: 'Security Scan Tests successfuly completed', 
+                      attachLog: true
+                }
+                failure{
+                      mail to: 'daezelgoyal01@gmail.com',
+                      subject: 'Security Scan',
+                      body: 'Security Scan Tests successfuly completed', 
+                      attachLog: true   
+                }
+            }
+         }
+        stage('Deploy to Staging'){
             steps{
                 echo "deploy the application to ${TESTING_ENVIRONMENT}"
+            }
+        }
+        stage('integration test on staging') {
+            steps {
+                echo 'running integration test on staging'
             }
         }
         stage('Approval'){
