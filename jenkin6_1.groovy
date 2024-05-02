@@ -10,6 +10,8 @@ pipeline{
             steps{
                 echo "fetch the source code from this -> ${DIRECTORY_PATH}"
                 echo "compile the code and generate any necessary artifacts"
+                echo "Building..."
+                echo "Build automation tool: Maven"
             }
             post{
                 success{
