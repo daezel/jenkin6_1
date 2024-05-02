@@ -11,14 +11,7 @@ pipeline{
                 echo "fetch the source code from this -> ${DIRECTORY_PATH}"
                 echo "Building..."
                 echo "Build automation tool: Maven"
-            }
-            post{
-                success{
-                    mail to: "daezelgoyal01@gmail.com",
-                    subject: "Build Status Email",
-                    body: "Build was Successful!!!"    
-                }
-            }                 
+            }      
         }
         stage('Test'){
             steps{
@@ -27,16 +20,20 @@ pipeline{
             }
             post{
                 success{
+                    emailext(
                       mail to: 'daezelgoyal01@gmail.com',
                       subject: 'Security Scan',
                       body: 'Security Scan Tests successfuly completed', 
                       attachLog: true
+                    )
                 }
                 failure{
+                    emailext(
                       mail to: 'daezelgoyal01@gmail.com',
                       subject: 'Security Scan',
                       body: 'Security Scan Tests successfuly completed', 
                       attachLog: true   
+                     )
                 }
             }
         }
@@ -53,19 +50,23 @@ pipeline{
             }
             post{
                 success{
+                    emailext(
                       mail to: 'daezelgoyal01@gmail.com',
                       subject: 'Security Scan',
                       body: 'Security Scan Tests successfuly completed', 
                       attachLog: true
+                    )   
                 }
                 failure{
+                    emailext(
                       mail to: 'daezelgoyal01@gmail.com',
                       subject: 'Security Scan',
-                      body: 'Security Scan Tests successfuly completed', 
+                      body: 'Security Scan Tests could not be completed', 
                       attachLog: true   
+                    )    
                 }
             }
-         }
+        }
         stage('Deploy to Staging'){
             steps{
                 echo "deploy the application to ${TESTING_ENVIRONMENT}"
