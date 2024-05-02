@@ -21,19 +21,19 @@ pipeline{
             post{
                 success{
                     emailext(
-                      to: 'daezelgoyal01@gmail.com',
-                      subject: 'Security Scan',
-                      body: 'Security Scan Tests successfuly completed', 
-                      attachLog: true
-                     )
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests successfuly completed', 
+                        attachLog: true
+                    )
                 }
                 failure{
                     emailext(
-                      to: 'daezelgoyal01@gmail.com',
-                      subject: 'Security Scan',
-                      body: 'Security Scan Tests Failed!!!', 
-                      attachLog: true   
-                     )
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests Failed!!!', 
+                        attachLog: true   
+                    )
                 }
             }
         }
@@ -51,19 +51,19 @@ pipeline{
             post{
                 success{
                     emailext(
-                      to: 'daezelgoyal01@gmail.com',
-                      subject: 'Security Scan',
-                      body: 'Security Scan Tests successfuly completed', 
-                      attachLog: true
-                     )   
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests successfuly completed', 
+                        attachLog: true
+                    )   
                 }
                 failure{
                     emailext(
-                      to: 'daezelgoyal01@gmail.com',
-                      subject: 'Security Scan',
-                      body: 'Security Scan Tests could not be completed', 
-                      attachLog: true   
-                     )    
+                        to: 'daezelgoyal01@gmail.com',
+                        subject: 'Security Scan',
+                        body: 'Security Scan Tests could not be completed', 
+                        attachLog: true   
+                    )    
                 }
             }
         }
