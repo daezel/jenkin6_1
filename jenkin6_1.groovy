@@ -25,7 +25,7 @@ pipeline{
                       subject: 'Security Scan',
                       body: 'Security Scan Tests successfuly completed', 
                       attachLog: true
-                    )
+                     )
                 }
                 failure{
                     emailext(
@@ -55,7 +55,7 @@ pipeline{
                       subject: 'Security Scan',
                       body: 'Security Scan Tests successfuly completed', 
                       attachLog: true
-                    )   
+                     )   
                 }
                 failure{
                     emailext(
@@ -63,7 +63,7 @@ pipeline{
                       subject: 'Security Scan',
                       body: 'Security Scan Tests could not be completed', 
                       attachLog: true   
-                    )    
+                     )    
                 }
             }
         }
