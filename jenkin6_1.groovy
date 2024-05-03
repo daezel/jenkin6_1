@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        DIRECTORY_PATH ="gh repo clone daezel/jenkin6_1"
+        DIRECTORY_PATH ="https://github.com/daezel/jenkin6_1.git"
         TESTING_ENVIRONMENT="AWS EC2"
         PRODUCTION_ENVIRONMENT="AWS EC2"
     }
