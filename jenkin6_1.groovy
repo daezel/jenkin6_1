@@ -22,7 +22,7 @@ pipeline{
                 success{
                     emailext(
                         to: 'daezelgoyal01@gmail.com',
-                        subject: 'Security Scan',
+                        subject: 'Testing',
                         body: 'Testing successfuly completed!!!', 
                         attachLog: true
                     )
@@ -30,7 +30,7 @@ pipeline{
                 failure{
                     emailext(
                         to: 'daezelgoyal01@gmail.com',
-                        subject: 'Security Scan',
+                        subject: 'Testing',
                         body: 'Testing Failed!!!', 
                         attachLog: true   
                     )
@@ -77,21 +77,9 @@ pipeline{
                 echo 'running integration test on staging'
             }
         }
-        stage('Approval'){
-            steps{
-                echo "Approval Started"
-                sleep(time:10, unit: 'SECONDS')
-                echo "Approval Ended"
-            }
-        }
         stage('Deploy to Production'){
             steps{
                 echo "Deployment to ->  ${PRODUCTION_ENVIRONMENT} Started and completed!"
-            }
-        }
-        stage('Complete'){
-            steps{
-                echo "Completed!"
             }
         }
     }
