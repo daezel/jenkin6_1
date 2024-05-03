@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Test'){
             steps{
-                echo "unit testing using -> -> Katalon"
+                echo "unit testing using -> Katalon"
                 echo "integration testing using -> Selenium"
             }
             post{
