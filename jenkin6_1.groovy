@@ -15,8 +15,8 @@ pipeline{
         }
         stage('Test'){
             steps{
-                echo "unit testing using Katalon"
-                echo "integration testing using Selenium"
+                echo "unit testing using -> Katalon"
+                echo "integration testing using -> Selenium"
             }
             post{
                 success{
@@ -40,13 +40,13 @@ pipeline{
         stage('Code Quality Check'){
             steps{
                 echo "checking the quality of the code"
-                echo "code analysis tool: SonarQube"
+                echo "code analysis tool-> SonarQube"
                 echo "Done!!!"
             }
         }
         stage('Security Scan') {
             steps {
-                echo "Perform a security scan on the code using OWASP Dependency-Check"
+                echo "Perform a security scan on the code using -> OWASP Dependency-Check"
             }
             post{
                 success{
